@@ -45,13 +45,13 @@ function initialize() {
         .then(function (answer) {
             switch (answer.action) {
                 case "View All Employees":
-                    employeeSearch();
+                    viewEmployees();
                     break;
                 case "View All Departments":
                     viewDepartments();
                     break;
                 case "View All Roles":
-                    employeeSearch();
+                    viewRoles();
                     break;
                 case "Add Employee":
                     employeeSearch();
@@ -82,9 +82,23 @@ function employeeSearch(){
 console.log("Hello");
 }
 
+function viewEmployees(){
+    connection.query("SELECT * FROM employee;", function(err, res) {
+      if (err) throw err;
+      console.table(['employee_id', 'first_name', 'last_name', 'role_id', 'manager_id'], res);
+  });
+}
+
 function viewDepartments(){
       connection.query("SELECT * FROM department;", function(err, res) {
         if (err) throw err;
         console.table(['department_id', 'name'], res);
     });
+}
+
+function viewRoles(){
+    connection.query("SELECT * FROM role;", function(err, res) {
+      if (err) throw err;
+      console.table(['role_id', 'title', 'salary', 'department_id'], res);
+  });
 }
