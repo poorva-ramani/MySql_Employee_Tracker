@@ -84,8 +84,9 @@ function initialize() {
 
 //view data
 function viewEmployees() {
-    var query = "SELECT employee.employee_id,employee.first_name,employee.last_name,role.role_type,department.department,role.salary,employee.manager_id FROM employee INNER JOIN role ON (role.role_id = employee.role_id) INNER JOIN department ON (department.department_id = role.department_id);";
-    //change to adding department based on manager id details later
+  //  var query = "SELECT employee.employee_id,employee.first_name,employee.last_name,role.role_type,department.department,role.salary,employee.manager_id FROM employee INNER JOIN role ON (role.role_id = employee.role_id) INNER JOIN department ON (department.department_id = role.department_id);";
+  var query ="SELECT a.employee_id AS 'employee ID',a.first_name,a.last_name,role.role_type,department.department,role.salary,concat(b.first_name, ' ',b.last_name) as 'Manager Name' FROM employee a LEFT OUTER JOIN employee b ON a.manager_id = b.employee_id INNER JOIN role ON (role.role_id = a.role_id) INNER JOIN department ON (department.department_id = role.department_id);";  
+  //change to adding department based on manager id details later
     connection.query(query, function (err, res) {
         if (err) throw err;
         console.table(res);
@@ -114,7 +115,7 @@ function viewRoles() {
 //add data
 function addEmployee() {
     connection.query("SELECT role.role_type,role.role_id,department.department,department.department_id  FROM role INNER JOIN department ON (department.department_id = role.department_id);",
-        function (err, res) {
+    function (err, res) {
             if (err) throw err;
             inquirer
                 .prompt([
@@ -143,7 +144,7 @@ function addEmployee() {
                     {
                         name: "manager_id",
                         type: "input",
-                        message: "What is Employee's Manager's name?"
+                        message: "What is Employee's Manager's id?"
                         //change to adding manager later
                     },
 

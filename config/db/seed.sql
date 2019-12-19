@@ -19,5 +19,12 @@ INSERT INTO role(role_type, salary, department_id) VALUES
  ("HR Director", 110000.00, 5);
 
 INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES
-("Poorva", "Ramani", 4, 2),
-("Scott", "Wozouski", 4, 2);
+("Michelle", "Quinn", 2, 1),
+("Ellen", "White", 1, 2),
+("Poorva", "Ramani", 4, 4),
+("Rosy", "Lange", 3, 1),
+("Donna", "Larue", 5, 6),
+("Debra", "Sparr", 1, 6),
+("Joanna", "Beiber", 9, 1);
+
+
